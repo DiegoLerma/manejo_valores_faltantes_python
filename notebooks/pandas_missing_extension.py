@@ -50,13 +50,13 @@ class MissingMethods:
         return (
             self._obj.missing.missing_variable_summary()
             .value_counts("n_missing")
-            .reset_index()
-            .rename(columns={"n_missing": "n_missing_in_variable", 0: "n_variables"})
+            .reset_index(name="n_variables")
+            .rename(columns={"n_missing": "n_missing_in_variable"})
             .assign(
                 pct_variables=lambda df: df.n_variables / df.n_variables.sum() * 100
             )
             .sort_values("pct_variables", ascending=False)
-        )
+        ) 
 
     def missing_case_table(self) -> pd.DataFrame():
         return (
