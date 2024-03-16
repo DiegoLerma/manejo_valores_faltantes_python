@@ -62,8 +62,8 @@ class MissingMethods:
         return (
             self._obj.missing.missing_case_summary()
             .value_counts("n_missing")
-            .reset_index()
-            .rename(columns={"n_missing": "n_missing_in_case", 0: "n_cases"})
+            .reset_index(name="n_cases")
+            .rename(columns={"n_missing": "n_missing_in_case"})
             .assign(pct_case=lambda df: df.n_cases / df.n_cases.sum() * 100)
             .sort_values("pct_case", ascending=False)
         )
